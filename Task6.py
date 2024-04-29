@@ -22,18 +22,40 @@ def distribute_eggs(board):
         board[x][y] = 1
 
 
-def print_board(board):
+def print_board(board, guesses):
     for row in range(0, row_count):
         for col in range(0, col_count):
-            print(board[row][col], end="")
+            if {'x': row, 'y': col} in guesses:
+                if (board[row][col] == 1):
+                    print('0', end="")
+                else:
+                    print('X', end="")
+            else:
+                print('.', end="")
         print("")
+
+
+def user_input(guesses):
+    x = int(input("x"))
+    y = int(input("y"))
+    point = {'x': x, 'y': y}
+    if point in guesses:
+        print("You've already tried this field, select another field")
+    else:
+        guesses.append(point)
 
 
 def main():
     board = create_empty_board()
-    print_board(board)
     distribute_eggs(board)
-    print_board(board)
+    guesses = []
+    all_eggs_found = False
+    while not all_eggs_found:
+        print_board(board, guesses)
+        user_input(guesses)
+        print_board(board, guesses)
+        all_eggs_found = len(list(filter(
+            lambda point: board[point['x']][point['y']] == 1, guesses))) == eggs_count
 
 
 if __name__ == '__main__':

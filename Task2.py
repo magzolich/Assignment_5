@@ -22,9 +22,11 @@
 # no repeats
 # check if the 1st input matches 2nd input
 
-pin_number_1 = (input("Provide your PIN number: "))
-pin_number_2 = (
-    input("Provide your PIN number: . It should match your first PIN number "))
+def provide_pin_numbers():
+    pin_number_1 = (input("Provide your PIN number: "))
+    pin_number_2 = (
+        input("Provide your PIN number: . It should match your first PIN number "))
+    return pin_number_1, pin_number_2
 
 
 def validate_pin(pin_number_1: list, pin_number_2: list):
@@ -51,10 +53,11 @@ def validate_pin(pin_number_1: list, pin_number_2: list):
     if not pin_number_1 == pin_number_2:
         return (False, "PIN numbers don't match.")
 
-    return True
+    return (True,)
 
 
 def main():
+    (pin_number_1, pin_number_2) = provide_pin_numbers()
     pin_validation = validate_pin(pin_number_1, pin_number_2)
     print(pin_validation)
 

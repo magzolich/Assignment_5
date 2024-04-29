@@ -11,7 +11,7 @@ def can_create_triangle(sides: tuple[int, int, int]):
     a, b, c = sides
     if a <= 0 or b <= 0 or c <= 0:
         return False
-    return a+b > c or a+c > b or b+c > a
+    return a+b > c and a+c > b and b+c > a
 
 
 def main():
